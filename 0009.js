@@ -41,7 +41,8 @@
 function productFib(prod) {
   let fibonacci = [0, 1];
   // this would be more efficient, but fails a few "false" tests, because of it.
-  // while (fibonacci[fibonacci.length - 1] < Math.sqrt(prod)) {
+  // let sqrt = Math.sqrt(prod);
+  // while (fibonacci[fibonacci.length - 1] < sqrt) {
   while (fibonacci[fibonacci.length - 2] * fibonacci[fibonacci.length - 1] < prod) {
     fibonacci.push(fibonacci[fibonacci.length - 2] + fibonacci[fibonacci.length - 1]);
   }
