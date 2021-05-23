@@ -43,40 +43,26 @@ const snail = function (array) {
     moveDirection = 0; // 0: right, 1: down, 2: left, 3: up
 
   const canMove = () => {
-    switch (moveDirection) {
-      case 0: // 0: right
-        return j + 1 <= right;
-        break;
-      case 1: // 1: down
-        return i + 1 <= bottom;
-        break;
-      case 2: // 2: left
-        return j - 1 >= left;
-        break;
-      case 3: // 3: up
-        return i - 1 >= top;
-        break;
-      default:
-        return false;
-    }
+    if (moveDirection === 0)
+      // 0: right
+      return j + 1 <= right;
+    if (moveDirection === 1)
+      // 1: down
+      return i + 1 <= bottom;
+    if (moveDirection === 2)
+      // 2: left
+      return j - 1 >= left;
+    if (moveDirection === 3)
+      // 3: up
+      return i - 1 >= top;
+    return false;
   };
 
   const move = () => {
-    switch (moveDirection) {
-      case 0: // 0: right
-        ++j;
-        break;
-      case 1: // 1: down
-        ++i;
-        break;
-      case 2: // 2: left
-        --j;
-        break;
-      case 3: // 3: up
-        --i;
-        break;
-      default:
-    }
+    if (moveDirection === 0) ++j; // 0: right
+    if (moveDirection === 1) ++i; // 1: down
+    if (moveDirection === 2) --j; // 2: left
+    if (moveDirection === 3) --i; // 3: up
   };
 
   const turn = () => {
