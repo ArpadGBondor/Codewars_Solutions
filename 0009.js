@@ -39,16 +39,10 @@
 // productFib(800) # should return {34, 55, false},
 
 function productFib(prod) {
-  let fibonacci = [0, 1];
-  // this would be more efficient, but fails a few "false" tests, because of it.
-  // let sqrt = Math.sqrt(prod);
-  // while (fibonacci[fibonacci.length - 1] < sqrt) {
-  while (fibonacci[fibonacci.length - 2] * fibonacci[fibonacci.length - 1] < prod) {
-    fibonacci.push(fibonacci[fibonacci.length - 2] + fibonacci[fibonacci.length - 1]);
+  let [fib1, fib2] = [0, 1];
+  let sqrt = Math.sqrt(prod);
+  while (fib2 < sqrt || fib1 * fib2 < prod) {
+    [fib1, fib2] = [fib2, fib1 + fib2];
   }
-  return [
-    fibonacci[fibonacci.length - 2],
-    fibonacci[fibonacci.length - 1],
-    fibonacci[fibonacci.length - 2] * fibonacci[fibonacci.length - 1] === prod,
-  ];
+  return [fib1, fib2, fib1 * fib2 === prod];
 }
