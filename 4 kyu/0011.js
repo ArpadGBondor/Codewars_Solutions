@@ -58,23 +58,11 @@ const snail = function (array) {
   };
 
   const turn = () => {
-    if (moveDirection === 0) {
-      // 0: right
-      moveDirection++;
-      top++;
-    } else if (moveDirection === 1) {
-      // 1: down
-      moveDirection++;
-      right--;
-    } else if (moveDirection === 2) {
-      // 2: left
-      moveDirection++;
-      bottom--;
-    } else if (moveDirection === 3) {
-      // 3: up
-      moveDirection = 0;
-      left++;
-    }
+    if (moveDirection === 0 /*      0: right */) top++;
+    else if (moveDirection === 1 /* 1: down  */) right--;
+    else if (moveDirection === 2 /* 2: left  */) bottom--;
+    else if (moveDirection === 3 /* 3: up    */) left++;
+    moveDirection = (moveDirection + 1) % 4;
     return true;
   };
 
