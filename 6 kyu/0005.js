@@ -1,3 +1,6 @@
+// Kata: The Supermarket Queue
+// Link: https://www.codewars.com/kata/57b06f90e298a7b53d000a86
+
 // There is a queue for the self-checkout tills at the supermarket. Your task is
 // write a function to calculate the total time required for all the customers to
 // check out!

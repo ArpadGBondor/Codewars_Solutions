@@ -1,3 +1,6 @@
+// Kata: Salesman's Travel
+// Link: https://www.codewars.com/kata/56af1a20509ce5b9b000001e
+
 // A traveling salesman has to visit clients. He got each client's address e.g. "432 Main Long Road St. Louisville OH 43071" as a list.
 
 // The basic zipcode format usually consists of two capital letters followed by a white space and five digits. The list of clients to visit was given as a string of all addresses, each separated from the others by a comma, e.g. :
