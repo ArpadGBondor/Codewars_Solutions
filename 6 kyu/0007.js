@@ -1,20 +1,74 @@
+// A traveling salesman has to visit clients. He got each client's address e.g. "432 Main Long Road St. Louisville OH 43071" as a list.
+
+// The basic zipcode format usually consists of two capital letters followed by a white space and five digits. The list of clients to visit was given as a string of all addresses, each separated from the others by a comma, e.g. :
+
+// "123 Main Street St. Louisville OH 43071,432 Main Long Road St. Louisville OH 43071,786 High Street Pollocksville NY 56432".
+
+// To ease his travel he wants to group the list by zipcode.
+
 // Task
-//    You will be given an array of numbers. You have to sort the odd numbers in ascending order while leaving the even numbers at their original positions.
+// The function travel will take two parameters r (addresses' list of all clients' as a string) and zipcode and returns a string in the following format:
+
+// zipcode:street and town,street and town,.../house number,house number,...
+
+// The street numbers must be in the same order as the streets where they belong.
+
+// If a given zipcode doesn't exist in the list of clients' addresses return "zipcode:/"
 
 // Examples
-//    [7, 1]  =>  [1, 7]
-//    [5, 8, 6, 3, 4]  =>  [3, 8, 6, 5, 4]
-//    [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]  =>  [1, 8, 3, 6, 5, 4, 7, 2, 9, 0]
+// r = "123 Main Street St. Louisville OH 43071,432 Main Long Road St. Louisville OH 43071,786 High Street Pollocksville NY 56432"
 
-function sortArray(array) {
-  for (let i = 0; i < array.length; ++i) {
-    if (array[i] % 2 !== 0) {
-      for (let j = i + 1; j < array.length; ++j) {
-        if (array[j] % 2 !== 0 && array[i] > array[j]) {
-          [array[i], array[j]] = [array[j], array[i]];
-        }
+// travel(r, "OH 43071") --> "OH 43071:Main Street St. Louisville,Main Long Road St. Louisville/123,432"
+
+// travel(r, "NY 56432") --> "NY 56432:High Street Pollocksville/786"
+
+// travel(r, "NY 5643") --> "NY 5643:/"
+// Note for Elixir:
+// In Elixir the empty addresses' input is an empty list, not an empty string.
+
+// Note:
+// You can see a few addresses and zipcodes in the test cases.
+
+function travel(r, zipcode) {
+  let resultStreetAndTownNames = [],
+    resultHouseNumbers = [];
+
+  // Split the input to separate addresses
+  const addresses = r.split(',').map((address) => {
+    // Split the address to separate words
+    const addressParts = address.trim().split(' ');
+
+    let houseNumber,
+      streetAndTown = [],
+      zipCode = [];
+
+    for (let i = 0; i < addressParts.length; ++i) {
+      if (i === 0) {
+        // First word in the string is the house number
+        houseNumber = addressParts[i];
+      } else if (i === addressParts.length - 2 || i === addressParts.length - 1) {
+        // Last two words in the string are the zip code
+        zipCode.push(addressParts[i]);
+      } else {
+        // Rest of the string is street and town
+        streetAndTown.push(addressParts[i]);
       }
     }
-  }
-  return array;
+
+    // return an object
+    return {
+      houseNumber,
+      streetAndTown: streetAndTown.join(' '),
+      zipCode: zipCode.join(' '),
+    };
+  });
+
+  addresses.forEach((address) => {
+    if (address.zipCode === zipcode) {
+      resultStreetAndTownNames.push(address.streetAndTown);
+      resultHouseNumbers.push(address.houseNumber);
+    }
+  });
+
+  return `${zipcode}:${resultStreetAndTownNames.join(',')}/${resultHouseNumbers.join(',')}`;
 }
