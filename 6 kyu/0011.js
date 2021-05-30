@@ -33,8 +33,7 @@ function bouncingBall(h, bounce, window) {
 
   let numberOfBounces = Math.log(window / h) / Math.log(bounce);
   // if the last bounce only reaches the window's height, that doesn't count.
-  if (numberOfBounces === Math.floor(numberOfBounces)) numberOfBounces -= 1;
-  numberOfBounces = Math.floor(numberOfBounces);
+  numberOfBounces = Math.ceil(Math.log(window / h) / Math.log(bounce)) - 1;
 
   return 1 + 2 * numberOfBounces;
 }
