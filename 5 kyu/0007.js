@@ -81,13 +81,18 @@ GeneticAlgorithm.prototype.select = function (population, fitnesses) {
   let resultIndexes = [];
 
   const rouletteWheel = () => {
+    // count the sum of fitnesses (excluding the element that's been selected already)
     let sumOfFitnesses = fitnesses
       .filter((element, index) => !resultIndexes.includes(index))
       .reduce((sum, f) => sum + f);
+    // multiply random with the sum of fitnesses
     let randomSelector = Math.random() * sumOfFitnesses;
     for (let i = 0; i < fitnesses.length; ++i) {
+      // excluding the element that's been already selected
       if (!resultIndexes.includes(i)) {
+        // subtract fitnesses one by one
         randomSelector -= fitnesses[i];
+        // return the selected index, when the random number goes below 0
         if (randomSelector < 0) return i;
       }
     }
@@ -104,13 +109,11 @@ GeneticAlgorithm.prototype.select = function (population, fitnesses) {
 GeneticAlgorithm.prototype.mutate = function (chromosome, p) {
   //  - mutate method is self-explanatory: take in one chromosome and a probability and return a mutated chromosome.
   let result = '';
+  // try every bit
   for (let i = 0; i < chromosome.length; ++i) {
+    // with p chance switch the bit 0->1 or 1->0.
     if (Math.random() < p) {
-      if (chromosome[i] === '0') {
-        result += '1';
-      } else {
-        result += '0';
-      }
+      result += chromosome[i] === '0' ? '1' : '0';
     } else {
       result += chromosome[i];
     }
@@ -121,6 +124,7 @@ GeneticAlgorithm.prototype.mutate = function (chromosome, p) {
 GeneticAlgorithm.prototype.crossover = function (chromosome1, chromosome2) {
   //  - the crossover method is self-explanatory: take in two chromosomes and return a crossed-over pair of
   //    chromosome.
+  // there are (chromosome1.length - 1) possible cuts between the bits
   let randomBit = Math.floor(Math.random() * (chromosome1.length - 1) + 1);
 
   return [
@@ -129,23 +133,22 @@ GeneticAlgorithm.prototype.crossover = function (chromosome1, chromosome2) {
   ];
 };
 
+//  - The run method will take:
+//     - a fitness function that accepts a chromosome and returns the fitness of that chromosome,
+//        - This fitness function will be preloaded (Helper.Fitness in C#)! What the test will do is generate a
+//          random binary string of 35 digits (a random Integer with 35 bits for Ruby), and your algorithm must
+//          discover that string!
+//        - The fitness will be calculated in a way similar to above, where the score of a chromosome is the
+//          number of bits that differ from the goal string.
+//     - the length of the chromosomes to generate (should be the same length as the goal chromosome)
+//     - crossover probability
+//        - the crossover probability we will use is 0.6
+//     - mutation probability
+//        - the mutation probability we will use is 0.002.
+//     - an optional number of iterations (default to 100).
+//        - since the chromosome length is small, 100 iterations should be enough to get the correct answer every
+//          time.
 GeneticAlgorithm.prototype.run = function (fitness, length, p_c, p_m, iterations = 100) {
-  //  - The run method will take:
-  //     - a fitness function that accepts a chromosome and returns the fitness of that chromosome,
-  //        - This fitness function will be preloaded (Helper.Fitness in C#)! What the test will do is generate a
-  //          random binary string of 35 digits (a random Integer with 35 bits for Ruby), and your algorithm must
-  //          discover that string!
-  //        - The fitness will be calculated in a way similar to above, where the score of a chromosome is the
-  //          number of bits that differ from the goal string.
-  //     - the length of the chromosomes to generate (should be the same length as the goal chromosome)
-  //     - crossover probability
-  //        - the crossover probability we will use is 0.6
-  //     - mutation probability
-  //        - the mutation probability we will use is 0.002.
-  //     - an optional number of iterations (default to 100).
-  //        - since the chromosome length is small, 100 iterations should be enough to get the correct answer every
-  //          time.
-
   // Make the population size whatever you want; 100 is a good number but anywhere between 50 and 1000 will work
   // just fine (although the bigger, the slower).
   let populationSize = 100;
