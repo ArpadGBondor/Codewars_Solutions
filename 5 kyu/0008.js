@@ -19,6 +19,6 @@ function pigIt(str) {
   } else {
     strArray = str.split(' ');
   }
-  for (let i = 0; i < strArray.length; ++i) strArray[i] = strArray[i].substr(1) + strArray[i].substr(0, 1) + `ay`;
+  strArray = strArray.map((word) => word.substr(1) + word.substr(0, 1) + `ay`);
   return strArray.join(' ') + strEnd;
 }
