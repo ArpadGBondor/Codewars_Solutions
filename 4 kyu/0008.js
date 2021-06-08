@@ -41,7 +41,8 @@ function sumOfDivided(lst) {
         // add the original element to the sum value.
         sum += lst[i];
         // divide the element with the prime as many times as I can.
-        while (temp[i] !== 0 && temp[i] % prime === 0) {
+        temp[i] /= prime;
+        while (temp[i] % prime === 0) {
           temp[i] /= prime;
         }
       }
