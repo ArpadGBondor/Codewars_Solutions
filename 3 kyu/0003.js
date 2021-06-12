@@ -70,6 +70,7 @@ var spiralize = function (size) {
     if (moveDirection === 1) ++i; // 1: down
     if (moveDirection === 2) --j; // 2: left
     if (moveDirection === 3) --i; // 3: up
+    result[i][j] = 1;
   };
 
   // turn right
@@ -83,10 +84,7 @@ var spiralize = function (size) {
   };
 
   // the algorithm is quite simple
-  while (canMove() || (turn() && canMove())) {
-    move();
-    result[i][j] = 1;
-  }
+  while (canMove() || (turn() && canMove())) move();
 
   return result;
 };
