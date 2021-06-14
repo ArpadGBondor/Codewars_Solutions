@@ -23,11 +23,6 @@ public class Kata
       search.Add(b[i]);
     }
     
-    bool notContains(int n)
-    {
-      return !search.Contains(n);
-    }
-    
-    return Array.FindAll(a, notContains);
+    return Array.FindAll(a, n => !search.Contains(n));
   }
 }
