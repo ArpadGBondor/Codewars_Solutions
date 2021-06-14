@@ -16,12 +16,12 @@ using System;
 
 public class ASum {
 	public static long findNb(long m) {
-    long n = 0L, cube = 0L;
-    while (m > 0) {
-      n += 1L;
-      cube = (long) Math.Pow(n,3);
-      m -= cube;
-    }
-    return m == 0 ? n : -1L;
+        long n = 0L, cube = 0L;
+        while (m > 0) {
+        n += 1L;
+        cube = (long) Math.Pow(n,3);
+        m -= cube;
+        }
+        return m == 0 ? n : -1L;
 	}
 }
