@@ -20,6 +20,7 @@
 // Kata.TitleCase("the quick brown fox")               => "The Quick Brown Fox"
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -27,43 +28,20 @@ public class Kata
 {
   public static string TitleCase(string title, string minorWords="")
   {
-    
-    List<string> WordList(string s)
-    {
-      List<string> words = new List<string>();
-      string word = "";
-      foreach(char c in s) {
-        if (c == ' '){
-          if (word != "")
-            words.Add(word.ToLower());
-          word = "";
-        } else {
-          word += c;
-        }
-      }
-      if (word != "") {
-        words.Add(word.ToLower());
-      }
-      return words;
-    }
-    Console.WriteLine("test");
-    
-    List<string> titleList = WordList(title);
-    List<string> minorList = WordList(minorWords == null ? "" : minorWords);
-    
-    // Creates a TextInfo based on the "en-US" culture.
-    TextInfo myTI = new CultureInfo("en-US",false).TextInfo;
-    
-    foreach (string s in titleList)
-      Console.WriteLine(s);
+    string[] titleList = title.ToLower().Split(' ');
+    string[] minors = (minorWords == null ? "" : minorWords.ToLower()).Split(' ');
 
-    string result = "";
+    // More efficient to check each word in a sorted set
+    SortedSet<string> minorList = new SortedSet<string>();
+    foreach(string m in minors)
+      minorList.Add(m);
     
-    for (int i = 0; i < titleList.Count; ++i)
+    string result = "";
+    for (int i = 0; i < titleList.Length; ++i)
     {
+      // transform the first word, and each one that's not in the minor list.
       if (i == 0 || !minorList.Contains(titleList[i]))
-        titleList[i] = myTI.ToTitleCase(titleList[i]);
-      
+        titleList[i] = string.Concat(titleList[i].Take(1)).ToUpper() + string.Concat(titleList[i].Skip(1) );
       result += (result == "" ? "" : " ") + titleList[i];
     }
     
