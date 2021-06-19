@@ -46,6 +46,7 @@
 using System;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MorseCodeDecoder
 {
@@ -108,17 +109,11 @@ public class MorseCodeDecoder
 
   public static string DecodeMorse(string morseCode)
   { 
-    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-    string[] codeWords = morseCode.Split("   ");
-
-    for (int i = 0; i < codeWords.Length; ++i) {
-      if (i > 0) 
-        sb.Append(' ');
-      foreach (string s in codeWords[i].Split(' '))
-        sb.Append(MorseCode.Get(s));
-    }
-      
-    return sb.ToString();
+    return string.Join(' ',
+                       morseCode.Split("   ").Select(
+                          word=>string.Concat(word.Split(' ').Select(
+                            s=>MorseCode.Get(s)
+                          ))
+                       ));
   }
 }
