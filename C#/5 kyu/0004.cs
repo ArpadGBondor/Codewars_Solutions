@@ -51,9 +51,10 @@ class GapInPrimes
       // Generate all primes below maxSqrt
       // Sieve of Eratosthenes
       List<long> primes = new List<long>();
-      for (long i = 2; i <= maxSqrt; ++i)
+      primes.Add(2);
+      for (long i = 3; i <= maxSqrt; i+=2)
         primes.Add(i);
-      for (int i = 0; i < primes.Count - 1; ++i) {
+      for (int i = 1; i < primes.Count - 1; ++i) {
         int j = i + 1;
         while(j < primes.Count) {
           if (primes[j] % primes[i] == 0) {
