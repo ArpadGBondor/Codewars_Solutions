@@ -93,10 +93,7 @@
 // curryPartial(curryPartial(curryPartial(add, 1)), 2, 3); //6
 
 function curryPartial(fn, ...args1) {
-  if (fn.length < 1) return fn();
-  if (fn.length <= args1.length) {
-    return fn(...args1);
-  }
+  if (fn.length <= args1.length) return fn(...args1);
   const returnFn = (...args2) => curryPartial(fn, ...args1, ...args2);
   Object.defineProperty(returnFn, 'length', { value: fn.length - args1.length });
   return returnFn;
