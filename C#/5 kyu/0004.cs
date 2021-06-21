@@ -52,9 +52,12 @@ class GapInPrimes
       // Sieve of Eratosthenes
       List<long> primes = new List<long>();
       primes.Add(2);
-      for (long i = 3; i <= maxSqrt; i+=2)
-        primes.Add(i);
-      for (int i = 1; i < primes.Count - 1; ++i) {
+      primes.Add(3);
+      for (long i = 5; i <= maxSqrt; i+=2)
+        if (i % 3 != 0)
+          primes.Add(i);
+      // First two primes are already checked
+      for (int i = 2; i < primes.Count - 1; ++i) {
         int j = i + 1;
         while(j < primes.Count) {
           if (primes[j] % primes[i] == 0) {
