@@ -103,8 +103,8 @@ public class Decomp
   }
   
   private static void simplifyFraction(ref long a, ref long b) {
-    for (long i = 2; i <= Math.Sqrt(b); ++i) {
-      if (b % i == 0 && a % i == 0) {
+    for (long i = 2; i <= Math.Sqrt(a); ++i) {
+      if (a % i == 0 && b % i == 0) {
         a /= i;
         b /= i;
       }
