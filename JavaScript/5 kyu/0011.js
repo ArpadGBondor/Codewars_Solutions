@@ -17,11 +17,7 @@
 // each handler will be subscribed at most once at any given moment of time. It can still be unsubscribed and then subscribed again
 // Also see an example test fixture for suggested usage
 
-function Event() {
-  return new EventObject();
-}
-
-class EventObject {
+class Event {
   constructor() {
     this.functions = [];
   }
@@ -30,6 +26,7 @@ class EventObject {
   }
   unsubscribe(func) {
     let index = this.functions.findIndex((f) => f === func);
+    console.log(`index: ${index}`);
     if (index >= 0) this.functions.splice(index, 1);
   }
   emit(...args) {
