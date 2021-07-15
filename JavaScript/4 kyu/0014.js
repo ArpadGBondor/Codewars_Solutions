@@ -51,27 +51,24 @@ function elementalForms(word) {
   while (processing.length > 0) {
     // take out an element from the queue
     let next = processing.shift();
-    // check the first 1-2-3 letter combinations
-    for (let i = 1; i <= 3; ++i) {
-      // if next.word have enough letters
-      if (next.word.length >= i) {
-        // the symbol of the element
-        let element = next.word.substr(0, 1).toUpperCase() + next.word.substr(1, i - 1);
-        // the rest of the word
-        let rest = next.word.substr(i);
-        // If the symbol belongs to an existing element
-        if (ELEMENTS[element]) {
-          if (!rest) {
-            // If the word ended, we add the elements to the final results
-            results.push([...next.partialResults, `${ELEMENTS[element]} (${element})`]);
-          } else {
-            // If the word haven't ended yet, we add the rest of the word and the partial results
-            // to the queue that needs to be processed
-            processing.push({
-              word: rest,
-              partialResults: [...next.partialResults, `${ELEMENTS[element]} (${element})`],
-            });
-          }
+    // check the first 1-2-3 letter combinations if next.word have enough letters
+    for (let i = 1; i <= 3 && i <= next.word.length; ++i) {
+      // the symbol of the element
+      let element = next.word.substr(0, 1).toUpperCase() + next.word.substr(1, i - 1);
+      // the rest of the word
+      let rest = next.word.substr(i);
+      // If the symbol belongs to an existing element
+      if (ELEMENTS[element]) {
+        if (!rest) {
+          // If the word ended, we add the elements to the final results
+          results.push([...next.partialResults, `${ELEMENTS[element]} (${element})`]);
+        } else {
+          // If the word haven't ended yet, we add the rest of the word and the partial results
+          // to the queue that needs to be processed
+          processing.push({
+            word: rest,
+            partialResults: [...next.partialResults, `${ELEMENTS[element]} (${element})`],
+          });
         }
       }
     }
