@@ -56,12 +56,7 @@ function elementalForms(word) {
       // if next.word have enough letters
       if (next.word.length >= i) {
         // the symbol of the element
-        let element;
-        if (i == 1) {
-          element = next.word.substr(0, 1).toUpperCase();
-        } else {
-          element = next.word.substr(0, 1).toUpperCase() + next.word.substr(1, i - 1);
-        }
+        let element = next.word.substr(0, 1).toUpperCase() + next.word.substr(1, i - 1);
         // the rest of the word
         let rest = next.word.substr(i);
         // If the symbol belongs to an existing element
