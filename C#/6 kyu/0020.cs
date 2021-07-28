@@ -19,7 +19,7 @@ public static class Kata
 {
   public static bool ValidPhoneNumber(string phoneNumber)
   {
-    Regex rgx = new Regex(@"^\([\d]{3}\) [\d]{3}-[\d]{4}$");
+    Regex rgx = new Regex(@"^\(\d{3}\) \d{3}-\d{4}$");
     return rgx.IsMatch(phoneNumber);
   }
 }
