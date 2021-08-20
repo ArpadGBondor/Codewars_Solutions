@@ -34,10 +34,10 @@
 -- -batting_average STRING
 
 select 
-  y.player_name, 
-  y.games,
-  substring(to_char(round(1000 * cast(y.hits as float) / y.at_bats) / 1000,'0.999'),2,5) as batting_average
+  player_name, 
+  games,
+  to_char(cast(hits as float) / at_bats,'FM0.000') as batting_average
 from 
-  yankees as y
-where y.at_bats >= 100
+  yankees
+where at_bats >= 100
 order by batting_average desc
