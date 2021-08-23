@@ -15,7 +15,7 @@
 // tickets([25, 25, 50, 50, 100]) // => NO. Vasya will not have the right bills to give 75 dollars of change (you can't make two bills of 25 from one of 50)
 
 function tickets(peopleInLine) {
-  cassa = {
+  cash = {
     25: 0,
     50: 0,
     100: 0,
@@ -24,23 +24,23 @@ function tickets(peopleInLine) {
 
   for (let i = 0; i < peopleInLine.length; ++i) {
     let payment = peopleInLine[i];
-    console.log('Before');
-    console.log(cassa);
-    console.log(payment);
-    // add note to the cassa
-    ++cassa[`${payment}`];
+    //     console.log("Before")
+    //     console.log(cash)
+    //     console.log(payment)
+    // add note to the cash
+    ++cash[`${payment}`];
     // take off price of the ticket
     payment -= 25;
-    // Starting from the biggest notes, check cassa for change
+    // Starting from the biggest notes, check cash for change
     notes.forEach((note) => {
-      while (note <= payment && cassa[`${note}`] > 0) {
-        --cassa[`${note}`];
+      while (note <= payment && cash[`${note}`] > 0) {
+        --cash[`${note}`];
         payment -= note;
       }
     });
-    console.log('After');
-    console.log(cassa);
-    console.log(payment);
+    //     console.log("After")
+    //     console.log(cash)
+    //     console.log(payment)
 
     // If we didn't have enough change, return "NO"
     if (payment > 0) return 'NO';
