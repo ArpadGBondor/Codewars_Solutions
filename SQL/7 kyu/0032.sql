@@ -56,6 +56,6 @@
 
 SELECT DISTINCT l1.liker_id as user1_id, l1.liked_id as user2_id
 FROM user_likes as l1
-JOIN user_likes as l2 ON l1.liker_id = l2.liked_id
-WHERE l2.liker_id = l1.liked_id AND l1.liker_id < l1.liked_id
+JOIN user_likes as l2 ON l1.liker_id = l2.liked_id AND l2.liker_id = l1.liked_id
+WHERE l1.liker_id < l1.liked_id
 ORDER BY user1_id, user2_id;
