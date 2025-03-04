@@ -33,19 +33,13 @@
 
 namespace myjinxin
 {
-    using System;
     using System.Linq;
     public class Kata
     {
-        public string StolenLunch(string note){
-          return new string(note.Select(c=>EncodeChar(c)).ToArray());
-        }
-        public char EncodeChar(char c) {
-          if (char.IsDigit(c))
-            return (char)('a' + c - '0');
-          if ('a' <= c && c <= 'j') 
-            return (char)('0' + c - 'a');
-          return c;
-        }
+        public string StolenLunch(string note) => 
+          new string(note.Select(c=>EncodeChar(c)).ToArray());
+        public char EncodeChar(char c) =>
+          char.IsDigit(c) ? (char)('a' + c - '0') :
+          'a' <= c && c <= 'j' ? (char)('0' + c - 'a') : c;
     }
 }
