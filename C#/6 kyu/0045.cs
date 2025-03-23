@@ -42,6 +42,7 @@
 namespace myjinxin
 {
   using System;
+  using System.Linq;
 
   public class Kata
   {
@@ -69,16 +70,8 @@ namespace myjinxin
     // We only call the function if matrix.Length is greater than 0
     private static int CountMines(int i, int j, bool[][] matrix) {
       // if coordinates are outside of the matrix, or there is no mine on the coordinate, return 0
-      if (
-        i < 0 || 
-        j < 0 || 
-        i >= matrix.Length || 
-        j >= matrix[0].Length || 
-        !matrix[i][j]
-      ) 
-        return 0;
       // else there is a mine on the coordinate
-      return 1;
+      return ( matrix.ElementAtOrDefault(i)?.ElementAtOrDefault(j) ?? false ) ? 1 : 0;
     }
   }
 }
