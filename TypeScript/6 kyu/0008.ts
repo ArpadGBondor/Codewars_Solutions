@@ -1,5 +1,5 @@
-// Kata: Who likes it?
-// Link: https://www.codewars.com/kata/5266876b8f4bf2da9b000362
+// Kata: Sum of Digits / Digital Root
+// Link: https://www.codewars.com/kata/541c8630095125aba6000c00
 
 // Digital root is the recursive sum of all the digits in a number.
 

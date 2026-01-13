@@ -1,5 +1,5 @@
-// Kata: Binary Addition
-// Link: https://www.codewars.com/kata/551f37452ff852b7bd000139
+// Kata: Square Every Digit
+// Link: https://www.codewars.com/kata/546e2562b03326a88e000020
 
 // Welcome. In this kata, you are asked to square every digit of a number and
 // concatenate them.
