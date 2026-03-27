@@ -18,9 +18,4 @@
 
 def high_and_low(numbers):
     nums = list(map(int, numbers.split(" ")))
-    min_n = nums[0]
-    max_n = nums[0]
-    for n in nums:
-        min_n = min(min_n, n)
-        max_n = max(max_n, n)
-    return f"{max_n} {min_n}"
+    return f"{max(nums)} {min(nums)}"
