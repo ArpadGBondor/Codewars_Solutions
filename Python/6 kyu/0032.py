@@ -1,0 +1,43 @@
+# Kata: Backwards Read Primes
+# Link: https://www.codewars.com/kata/5539fecef69c483c5a000015
+
+# Backwards-read-primes are primes that when read backwards in base 10 (from
+# right to left) are a different prime. (This rules out primes which are
+# palindromes.)
+
+# Examples:
+#   - 13 17 31 37 71 73
+
+# 13 is such because it's prime and read from right to left writes 31 which is
+# prime too. Same for the others.
+
+# Task
+# Find all Backwards-read-primes between two positive given numbers (both
+# inclusive), the second one always being greater than or equal to the first
+# one. The resulting array or the resulting string will be ordered following the
+# natural order of the prime numbers.
+
+# Examples (in general form):
+#   (start = 2, end = 100) => [13, 17, 31, 37, 71, 73, 79, 97]
+#   (start = 9900, end = 10000) => [9923, 9931, 9941, 9967]
+#   (start = 501, end = 599) => []
+
+# See "Sample Tests" for your language.
+
+import math
+
+
+def backwards_prime(start, stop):
+    res = []
+    for i in range(start, stop + 1, 1):
+        backwards_i = int(str(i)[::-1])
+        if i != backwards_i and is_prime(i) and is_prime(backwards_i):
+            res.append(i)
+    return res
+
+
+def is_prime(n):
+    for i in range(2, round(math.sqrt(n)) + 2, 1):
+        if n % i == 0:
+            return False
+    return True
